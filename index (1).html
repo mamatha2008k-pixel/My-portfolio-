@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Kondaveeti Mamatha — BTech CSE student and aspiring software engineer.">
+<title>Kondaveeti Mamatha | 3D Developer Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#050816; --panel:rgba(13,19,43,.72); --line:rgba(125,211,252,.18);
+  --cyan:#67e8f9; --purple:#a78bfa; --pink:#f0abfc; --text:#eef2ff; --muted:#9aa8c7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Space Grotesk",sans-serif;background:radial-gradient(circle at 50% -10%,#172554 0,#050816 42%,#02030b 100%);
+  color:var(--text);overflow-x:hidden;line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+#stars{position:fixed;inset:0;z-index:-5;width:100%;height:100%}
+.grid{
+ position:fixed;inset:45% -20% -35%;z-index:-3;opacity:.23;
+ background-image:linear-gradient(rgba(103,232,249,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(103,232,249,.3) 1px,transparent 1px);
+ background-size:55px 55px;transform:perspective(500px) rotateX(58deg);mask-image:linear-gradient(to bottom,transparent,#000 30%,#000);
+}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+nav{
+ position:fixed;top:16px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 28px));
+ z-index:20;display:flex;align-items:center;justify-content:space-between;padding:11px 14px 11px 18px;
+ background:rgba(5,8,22,.68);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:18px;
+ box-shadow:0 15px 50px rgba(0,0,0,.25)
+}
+.logo{font-family:Orbitron;font-weight:800;letter-spacing:1px;color:var(--cyan)}
+.logo span{color:var(--purple)}
+nav ul{display:flex;gap:8px;list-style:none}
+nav a{padding:9px 12px;color:#b9c4df;font-size:.85rem;border-radius:10px;transition:.25s}
+nav a:hover{color:white;background:rgba(103,232,249,.09)}
+.menu{display:none;background:none;border:0;color:white;font-size:1.5rem}
+section{width:min(1120px,calc(100% - 32px));margin:auto;padding:100px 0}
+.hero{min-height:100vh;display:grid;place-items:center;padding-top:120px}
+.hero-wrap{width:100%;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(103,232,249,.22);background:rgba(103,232,249,.06);padding:7px 12px;border-radius:99px;color:var(--cyan);font-size:.78rem;letter-spacing:1px;text-transform:uppercase}
+.dot{width:7px;height:7px;background:#4ade80;border-radius:50%;box-shadow:0 0 14px #4ade80}
+h1{font-family:Orbitron;font-size:clamp(2.7rem,7vw,6.3rem);line-height:.98;margin:22px 0 18px;letter-spacing:-3px}
+.gradient{background:linear-gradient(100deg,var(--cyan),var(--purple),var(--pink));-webkit-background-clip:text;color:transparent}
+.hero p{max-width:650px;color:var(--muted);font-size:1.06rem}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:.25s;font-weight:600;font-size:.9rem}
+.btn.primary{background:linear-gradient(100deg,rgba(103,232,249,.18),rgba(167,139,250,.2));border-color:rgba(103,232,249,.4)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(103,232,249,.12)}
+.scene{height:520px;display:grid;place-items:center;perspective:1100px}
+.core{
+ width:260px;height:260px;position:relative;transform-style:preserve-3d;
+ animation:float 5s ease-in-out infinite;transform:rotateX(14deg) rotateY(-22deg)
+}
+.core .cube{position:absolute;inset:35px;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.face{position:absolute;inset:0;border:1px solid rgba(103,232,249,.5);background:rgba(103,232,249,.025);box-shadow:inset 0 0 30px rgba(103,232,249,.08),0 0 40px rgba(103,232,249,.08)}
+.f1{transform:translateZ(85px)}.f2{transform:rotateY(180deg) translateZ(85px)}
+.f3{transform:rotateY(90deg) translateZ(85px)}.f4{transform:rotateY(-90deg) translateZ(85px)}
+.f5{transform:rotateX(90deg) translateZ(85px)}.f6{transform:rotateX(-90deg) translateZ(85px)}
+.ring{position:absolute;inset:-25px;border:1px solid rgba(167,139,250,.65);border-radius:50%;transform:rotateX(70deg);box-shadow:0 0 25px rgba(167,139,250,.2)}
+.ring.two{inset:-60px;transform:rotateY(70deg);border-color:rgba(240,171,252,.4)}
+.orb{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--cyan);box-shadow:0 0 25px var(--cyan);top:-25px;right:20px}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}} @keyframes float{50%{transform:translateY(-15px) rotateX(20deg) rotateY(25deg)}}
+.section-head{margin-bottom:35px}.kicker{font-family:Orbitron;color:var(--cyan);font-size:.72rem;letter-spacing:2px;text-transform:uppercase}
+h2{font-family:Orbitron;font-size:clamp(1.8rem,4vw,3rem);margin-top:8px}.section-head p{color:var(--muted);margin-top:8px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+ background:linear-gradient(145deg,rgba(19,27,58,.82),rgba(7,11,29,.7));border:1px solid var(--line);
+ border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,border .2s;
+ transform-style:preserve-3d;
+}
+.card:hover{border-color:rgba(103,232,249,.42);transform:translateY(-7px)}
+.card:before{content:"";position:absolute;width:100px;height:100px;border-radius:50%;background:rgba(103,232,249,.08);filter:blur(25px);right:-30px;top:-30px}
+.icon{font-size:1.8rem;margin-bottom:16px}.card h3{font-family:Orbitron;font-size:1rem;margin-bottom:8px}.card p{color:var(--muted);font-size:.9rem}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}.tag{font-size:.7rem;padding:5px 9px;border-radius:99px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);color:#d8ccff}
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px}
+.profile{
+ min-height:310px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(145deg,#101938,#080c20);
+ display:grid;place-items:center;position:relative;overflow:hidden;
+}
+.avatar{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;font-family:Orbitron;font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#132e45,#25183f);border:1px solid rgba(103,232,249,.5);box-shadow:0 0 70px rgba(103,232,249,.12)}
+.stats{position:absolute;bottom:18px;display:flex;gap:22px;color:var(--muted);font-size:.75rem}.stats b{display:block;color:white;font-size:1.1rem}
+.info{display:grid;gap:16px}.info-box{padding:21px;border:1px solid var(--line);border-radius:20px;background:rgba(13,19,43,.58)}
+.info-box h3{font-size:.95rem;color:var(--cyan);margin-bottom:6px}.info-box p{color:var(--muted);font-size:.9rem}
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.skill{padding:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}.skill-top{display:flex;justify-content:space-between;font-size:.85rem}.bar{height:6px;background:#151b32;border-radius:99px;margin-top:10px;overflow:hidden}.fill{height:100%;width:var(--w);background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:99px}
+.project{min-height:260px}.project .num{font-family:Orbitron;color:rgba(103,232,249,.55);font-size:.7rem}.project h3{font-size:1.25rem;margin:14px 0 8px}.project a{display:inline-block;margin-top:18px;color:var(--cyan);font-size:.82rem}
+.timeline{border-left:1px solid rgba(103,232,249,.22);margin-left:10px;padding-left:25px;display:grid;gap:20px}.event{position:relative;padding:20px;border:1px solid var(--line);border-radius:18px;background:rgba(13,19,43,.55)}.event:before{content:"";position:absolute;width:9px;height:9px;border-radius:50%;background:var(--cyan);left:-30px;top:27px;box-shadow:0 0 15px var(--cyan)}.event small{color:var(--cyan);font-family:Orbitron}.event h3{margin:7px 0}.event p{color:var(--muted);font-size:.88rem}
+.contact{display:grid;grid-template-columns:1fr .9fr;gap:20px}.contact-card{padding:30px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(20,29,63,.75),rgba(7,11,28,.75))}
+.email{font-size:clamp(1.2rem,3vw,2rem);font-family:Orbitron;margin:18px 0;word-break:break-word}.email a{color:var(--cyan)}
+footer{padding:35px 16px 55px;text-align:center;color:#66738f;font-size:.78rem}footer b{color:#aebbd4}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}.reveal.show{opacity:1;transform:none}
+@media(max-width:850px){
+ nav ul{display:none}.menu{display:block}.hero-wrap,.about,.contact{grid-template-columns:1fr}.scene{height:360px;order:-1}.core{transform:scale(.8) rotateX(14deg) rotateY(-22deg)}.cards{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+ section{padding:75px 0}.cards,.skills{grid-template-columns:1fr}.hero{padding-top:110px}.scene{height:290px}.core{transform:scale(.62) rotateX(14deg) rotateY(-22deg)}h1{letter-spacing:-2px}.logo{font-size:.85rem}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas><div class="grid"></div><div class="noise"></div>
+
+<nav>
+  <a class="logo" href="#home">KM<span>.</span>DEV</a>
+  <ul>
+    <li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#journey">Journey</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="menu" aria-label="Menu">☰</button>
+</nav>
+
+<main>
+<section class="hero" id="home">
+ <div class="hero-wrap">
+  <div class="reveal">
+   <div class="eyebrow"><span class="dot"></span> Available for opportunities</div>
+   <h1>KONDAVEETI<br><span class="gradient">MAMATHA</span></h1>
+   <p>BTech CSE student building a strong foundation in software development, problem solving and modern web technologies — with a clear goal of becoming a software engineer.</p>
+   <div class="buttons">
+    <a class="btn primary" href="#projects">Explore My Work →</a>
+    <a class="btn" href="mailto:mamatha2008k@gmail.com">Let's Connect</a>
+   </div>
+  </div>
+  <div class="scene reveal" id="scene">
+   <div class="core">
+    <div class="cube"><i class="face f1"></i><i class="face f2"></i><i class="face f3"></i><i class="face f4"></i><i class="face f5"></i><i class="face f6"></i></div>
+    <i class="ring"></i><i class="ring two"></i><i class="orb"></i>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="about" class="reveal">
+ <div class="section-head"><div class="kicker">01 / Player Profile</div><h2>About Me</h2><p>A curious learner preparing for the next level.</p></div>
+ <div class="about">
+  <div class="profile"><div class="avatar">KM</div><div class="stats"><span><b>02</b>Year</span><span><b>CSE</b>Branch</span><span><b>∞</b>Curiosity</span></div></div>
+  <div class="info">
+   <div class="info-box"><h3>🎓 Current Mission</h3><p>I am currently pursuing my second year of BTech in Computer Science and Engineering, continuously strengthening my programming and development skills.</p></div>
+   <div class="info-box"><h3>🚀 Short-Term Goal</h3><p>Secure a software role through campus placements by building strong technical fundamentals, projects, communication skills and problem-solving ability.</p></div>
+   <div class="info-box"><h3>🌟 Long-Term Goal</h3><p>Become a skilled software engineer who can design, develop and ship useful, reliable and user-focused software products.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="skills" class="reveal">
+ <div class="section-head"><div class="kicker">02 / Loadout</div><h2>Skills & Arsenal</h2><p>Technologies and capabilities I am developing.</p></div>
+ <div class="skills">
+  <div class="skill"><div class="skill-top"><span>HTML & CSS</span><span>85%</span></div><div class="bar"><div class="fill" style="--w:85%"></div></div></div>
+  <div class="skill"><div class="skill-top"><span>JavaScript</span><span>70%</span></div><div class="bar"><div class="fill" style="--w:70%"></div></div></div>
+  <div class="skill"><div class="skill-top"><span>Java / Programming</span><span>65%</span></div><div class="bar"><div class="fill" style="--w:65%"></div></div></div>
+  <div class="skill"><div class="skill-top"><span>Problem Solving</span><span>65%</span></div><div class="bar"><div class="fill" style="--w:65%"></div></div></div>
+ </div>
+ <div class="tags" style="margin-top:18px"><span class="tag">CSE Fundamentals</span><span class="tag">Git & GitHub</span><span class="tag">Responsive Design</span><span class="tag">Teamwork</span><span class="tag">Communication</span><span class="tag">Continuous Learning</span></div>
+</section>
+
+<section id="projects" class="reveal">
+ <div class="section-head"><div class="kicker">03 / Missions</div><h2>Projects</h2><p>Space for the projects I build during my learning journey.</p></div>
+ <div class="cards">
+  <article class="card project"><div class="num">MISSION_01</div><h3>3D Personal Portfolio</h3><p>An interactive portfolio designed with HTML, CSS and JavaScript, focused on immersive UI, animations and responsive UX.</p><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div></article>
+  <article class="card project"><div class="num">MISSION_02</div><h3>Hackathon Experience</h3><p>Participated in a hackathon, gaining hands-on exposure to idea generation, rapid development, collaboration and presenting a solution.</p><div class="tags"><span class="tag">Hackathon</span><span class="tag">Teamwork</span><span class="tag">Innovation</span></div></article>
+  <article class="card project"><div class="num">MISSION_03</div><h3>Next Project</h3><p>A future project slot for a problem-solving application or web project. Every new project is another level unlocked.</p><div class="tags"><span class="tag">Coming Soon</span><span class="tag">Build</span></div></article>
+ </div>
+</section>
+
+<section id="journey" class="reveal">
+ <div class="section-head"><div class="kicker">04 / Progress Log</div><h2>My Journey</h2><p>Current progress and next checkpoints.</p></div>
+ <div class="timeline">
+  <div class="event"><small>NOW • LEVEL 02</small><h3>BTech CSE — Second Year</h3><p>Building stronger programming fundamentals, exploring development and creating projects to turn learning into practical experience.</p></div>
+  <div class="event"><small>ACHIEVEMENT UNLOCKED</small><h3>Hackathon Participant</h3><p>Experienced the fast-paced environment of a hackathon and learned the value of collaboration, creativity and execution.</p></div>
+  <div class="event"><small>NEXT CHECKPOINT</small><h3>Campus Placement Ready</h3><p>Focus areas: DSA and core CS concepts, projects, aptitude, communication, interview preparation and consistent practice.</p></div>
+  <div class="event"><small>LONG-TERM QUEST</small><h3>Software Engineer</h3><p>Grow into a professional engineer capable of building meaningful software and continuously learning new technologies.</p></div>
+ </div>
+</section>
+
+<section id="contact" class="reveal">
+ <div class="section-head"><div class="kicker">05 / Connect</div><h2>Let's Build Something</h2><p>Open to learning, collaboration and future opportunities.</p></div>
+ <div class="contact">
+  <div class="contact-card"><div class="kicker">PLAYER CONTACT</div><div class="email"><a href="mailto:mamatha2008k@gmail.com">mamatha2008k@gmail.com</a></div><p style="color:var(--muted)">If you'd like to connect about a project, learning opportunity, collaboration or campus placement, feel free to reach out.</p><div class="buttons"><a class="btn primary" href="mailto:mamatha2008k@gmail.com?subject=Portfolio%20Contact">Send Email ↗</a></div></div>
+  <div class="contact-card"><div class="kicker">PROFILE DATA</div><div style="margin-top:18px;display:grid;gap:14px;color:var(--muted);font-size:.9rem"><div>👤 <b style="color:white">Kondaveeti Mamatha</b></div><div>🎓 BTech — Computer Science & Engineering</div><div>📚 Current Level — Second Year</div><div>💼 Goal — Software Engineer</div><div>🏆 Experience — Hackathon Participant</div></div></div>
+ </div>
+</section>
+</main>
+
+<footer>© <span id="year"></span> <b>Kondaveeti Mamatha</b> • Crafted with HTML, CSS & JavaScript</footer>
+
+<script>
+const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
+let W,H,stars=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;stars=Array.from({length:Math.min(180,Math.floor(W/7))},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*2+.3,s:Math.random()*1.5+.2}))}
+function draw(){ctx.clearRect(0,0,W,H);for(const p of stars){p.y+=p.s*.15;if(p.y>H)p.y=0;ctx.globalAlpha=.25+p.s/3;ctx.fillStyle='#b9eaff';ctx.fillRect(p.x,p.y,p.s,p.s)}requestAnimationFrame(draw)}resize();addEventListener('resize',resize);draw();
+
+document.getElementById('year').textContent=new Date().getFullYear();
+
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.card').forEach(card=>{
+ card.addEventListener('mousemove',e=>{
+  const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+  card.style.transform=`perspective(700px) rotateX(${y*-5}deg) rotateY(${x*7}deg) translateY(-5px)`;
+ });
+ card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+const scene=document.getElementById('scene');
+addEventListener('mousemove',e=>{
+ if(innerWidth<850)return;
+ const x=(e.clientX/innerWidth-.5)*12,y=(e.clientY/innerHeight-.5)*-8;
+ scene.style.transform=`translate(${x}px,${y}px)`;
+});
+document.querySelector('.menu').onclick=()=>{const u=document.querySelector('nav ul');u.style.display=u.style.display==='flex'?'none':'flex';u.style.position='absolute';u.style.top='58px';u.style.right='10px';u.style.flexDirection='column';u.style.background='rgba(5,8,22,.95)';u.style.padding='10px';u.style.border='1px solid rgba(125,211,252,.18)';u.style.borderRadius='14px'};
+</script>
+</body>
+</html>
